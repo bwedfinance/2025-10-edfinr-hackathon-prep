@@ -18,10 +18,10 @@ You can download the latest versions here:
 2️⃣ Install or update the packages we’ll be using
 
 First, run this code to make sure you have the packages we'll use:
-
-`install.packages(c("tidyverse", "scales", "viridis", "edfinr"))`
+```{r}
+install.packages(c("tidyverse", "scales", "viridis", "edfinr"))
+```
 Then check that everything loads without errors:
-
 ```{r}
 library(tidyverse)
 library(scales)
