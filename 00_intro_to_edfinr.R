@@ -15,11 +15,16 @@ dist_us_full_sy22 <- get_finance_data(dataset_type = "full")
 # the `yr` parameter can give you data from a single year or multiple years
 dist_us_skinny_sy12_to_sy22 <- get_finance_data(yr = "2012:2022")
 
+# exploring data -----------
+
+names(dist_us_full_sy22)
+
 # subsetting data ----------
 
 # use `filter()` will help you focus on a particular state
 ky_full_sy22 <- dist_us_full_sy22 |> 
   filter(state == "KY") |> 
+  # use `mutate` to convert total expenditures to per-puil
   mutate(
     exp_sal_pp = exp_emp_salary / enroll,
     exp_bene_pp = exp_emp_bene / enroll,
@@ -31,6 +36,12 @@ ky_full_sy22 <- dist_us_full_sy22 |>
     exp_emp_comp_pp
 
   )
+
+# you can also filter for a group of states 
+
+ky_tn_in_oh <- dist_us_skinny_sy22 |> 
+  filter(state %in% c("KY", "TN", "IN", "OH"))
+
 
 # plotting data ------------
 
@@ -91,3 +102,45 @@ ggsave(
   width = 8,
   height = 6
 )
+
+
+# state comparison plots -------
+
+# one varaible across several states
+ggplot() +
+  geom_density(
+    data = ky_tn_in_oh,
+    alpha = .6,
+    aes(
+      x = rev_state_pp,
+      # use fill to differentiate between different states
+      fill = state
+    )
+  ) +
+  theme_bw()
+
+# multiple variables across several states
+ggplot() +
+  geom_point(
+    data = ky_tn_in_oh,
+    alpha = .6,
+    aes(
+      x = ba_plus_pct,
+      y = rev_local_pp,
+      size = enroll,
+      color = stpov_pct
+    )
+  ) +
+  scale_color_viridis() +
+  # use `facet_wrap()` to create small multiples by state
+  facet_wrap(~state) +
+  # see trends for x and y vars with `geom_smooth()`
+  geom_smooth(
+    data = ky_tn_in_oh,
+    color = "orange",
+    aes(
+      x = ba_plus_pct,
+      y = rev_local_pp
+    )
+  ) +
+  theme_bw()
