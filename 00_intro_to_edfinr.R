@@ -28,7 +28,7 @@ view(dist_us_full_sy22)
 # use `filter()` will help you focus on a particular state
 ky_full_sy22 <- dist_us_full_sy22 |> 
   filter(state == "KY") |> 
-  # use `mutate` to convert total expenditures to per-puil
+  # use `mutate` to convert total expenditures to per-pupil
   mutate(
     exp_sal_pp = exp_emp_salary / enroll,
     exp_bene_pp = exp_emp_bene / enroll,
