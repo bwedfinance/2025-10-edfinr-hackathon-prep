@@ -11,3 +11,6 @@ dist_us_full_sy12_to_sy22 <- get_finance_data(
 # if using positron and you have an anthropic api key, try out databot!
 # start your prompt with: 
 # Please use the `dist_us_full_sy12_to_sy22` dataframe to...
+
+# use /report to generate a quarto doc of insights
+s
