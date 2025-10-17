@@ -19,6 +19,10 @@ dist_us_skinny_sy12_to_sy22 <- get_finance_data(yr = "2012:2022")
 
 names(dist_us_full_sy22)
 
+glimpse(dist_us_full_sy22)
+
+view(dist_us_full_sy22)
+
 # subsetting data ----------
 
 # use `filter()` will help you focus on a particular state
